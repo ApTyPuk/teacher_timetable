@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Teachers table</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<header>
+    <a href="/containerWelcome" target="content-iframe" class="btn">Teacher: Kate</a>
+    <!--    <h1 th:text="'Teacher: ' +${teacher.name}">Teacher: Kate</h1>-->
+</header>
+
+
+<body>
+
+<div class="container">
+
+    <div class="navigation">
+        <nav>
+            <ul>
+                <li><a href="/teacherShowAll" target="content-iframe" class="btn">Show all teachers</a></li>
+                <li><a href="/teacherManage" target="content-iframe" class="btn">Manage teachers</a></li>
+                <li><a href="/groupShowAll" target="content-iframe" class="btn">Show all groups</a></li>
+                <li><a href="/groupManage" target="content-iframe" class="btn">Manage groups</a></li>
+                <li><a href="/lessonShowAll" target="content-iframe" class="btn">Show all lessons</a></li>
+                <li><a href="/lessonManage" target="content-iframe" class="btn">Manage lessons</a></li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <div class="content">
+        <iframe src="/containerWelcome" name="content-iframe" title="content"></iframe>
+    </div>
+
+</div>
+
+</body>
+
+<footer>
+    Footer
+</footer>
+
+</html>

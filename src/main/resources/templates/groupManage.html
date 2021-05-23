@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>Manage Groups</title>
+</head>
+
+<body class="frame-slave body">
+
+<a th:href="@{/groupAdd}" class="btn-container">Add group</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID:</th>
+        <th>Name:</th>
+        <th>Education start year:</th>
+        <th>Education end year:</th>
+        <th>Operation:</th>
+
+    </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+
+    <tr th:each="studentGroup : ${studentGroups}">
+        <td th:text="${studentGroup.id}">000</td>
+        <td th:text="${studentGroup.name}">No name</td>
+        <td th:text="${studentGroup.educationYearStart}">No start year</td>
+        <td th:text="${studentGroup.educationYearEnd}">No end year</td>
+        <td>
+            <div>
+                <div class="row">
+                    <a th:href="@{/studentGroups/{groupId}/edit(groupId=${studentGroup.id})}">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </a>
+                </div>
+
+                <div class="row">
+                    <form th:action="@{/groupManage}" th:object="${deleteRequest}" method="post" class="clear">
+                        <input type="hidden" name="id" th:value="${studentGroup.id}">
+                        <button type="submit">Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+<label>&nbsp;</label>
+<div class="form-messages success row" role="alert" th:text="${success}" th:if="${success}"></div>
+<table th:if="${errors != null}" class="form-messages error">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.message}"></td>
+    </tr>
+</table>
+
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+
+</body>
+
+</html>

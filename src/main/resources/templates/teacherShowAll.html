@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>View all teachers</title>
+</head>
+
+<body class="frame-slave">
+
+<a th:href="@{/teacherAdd}" class="btn-container">Add teacher</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID:</th>
+        <th>Name & Last Name:</th>
+        <th>Phone number:</th>
+        <th>E-mail address:</th>
+    </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.id}">000</td>
+
+        <td><a th:href="@{/teachers/{teacherId}/lessons(teacherId=${teacher.id})}"
+               th:text="${teacher.name} + ' ' + ${teacher.lastName}" class="btn-small">No name</a></td>
+
+        <td th:text="${teacher.phoneNumber}">No number</td>
+        <td th:text="${teacher.email}">No email</td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+<label>&nbsp;</label>
+<div class="form-messages success row" role="alert" th:text="${success}" th:if="${success}"></div>
+<table th:if="${errors != null}" class="form-messages error">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.message}"></td>
+    </tr>
+</table>
+
+</body>
+
+</html>

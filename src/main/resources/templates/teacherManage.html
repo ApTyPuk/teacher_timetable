@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>Manage Teachers</title>
+</head>
+
+<body class="frame-slave body">
+
+<a th:href="@{/teacherAdd}" class="btn-container">Add teacher</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID:</th>
+        <th>Name:</th>
+        <th>Last name:</th>
+        <th>Phone number:</th>
+        <th>E-mail address:</th>
+        <th>Hour rate:</th>
+        <th>Operation:</th>
+    </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+
+    <tr th:each="teacher : ${teachers}">
+        <td th:text="${teacher.id}">000</td>
+        <td th:text="${teacher.name}">No name</td>
+        <td th:text="${teacher.lastName}">No last name</td>
+        <td th:text="${teacher.phoneNumber}">No number</td>
+        <td th:text="${teacher.email}">No email</td>
+        <td th:text="${teacher.hourRate}">Zero rate</td>
+        <td>
+            <div>
+                <div class="row">
+                    <a th:href="@{/teachers/{teacherId}/edit(teacherId=${teacher.id})}">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </a>
+                </div>
+
+                <div class="row">
+                    <form th:action="@{/teacherManage}" th:object="${deleteRequest}" method="post" class="clear">
+                        <input type="hidden" name="id" th:value="${teacher.id}">
+                        <button type="submit">Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </td>
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+<label>&nbsp;</label>
+<div class="form-messages success row" role="alert" th:text="${success}" th:if="${success}"></div>
+<table th:if="${errors != null}" class="form-messages error">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.message}"></td>
+    </tr>
+</table>
+
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
+</body>
+
+</html>

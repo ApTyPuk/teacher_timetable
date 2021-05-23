@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>Add new Lesson</title>
+</head>
+
+<body class="frame-slave">
+
+<form th:href="@{/lessonAdd}" th:object="${request}" method="post" class="">
+
+    <h2>Add Lesson</h2>
+
+    <div>
+        <div class="row span-1-of-3">
+            <label for="name">Name</label>
+        </div>
+        <div class="row span-2-of-3">
+            <input type="text" name="name" id="name" placeholder=" Lesson name"
+                   th:field="${request.lessonName}" class="span-2-of-4" required/>
+        </div>
+    </div>
+
+    <div>
+        <div class="row span-1-of-3">
+            <label for="teacher">Teacher</label>
+        </div>
+        <div class="row span-2-of-3">
+            <select th:field="*{teachersId}" name="teacher" id="teacher" class="span-2-of-4">
+                <option value="">--</option>
+                <option th:each="teacher : ${teachers}"
+                        th:value="${teacher.id}"
+                        th:utext="${teacher.name} + ' ' + ${teacher.lastName}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <div class="row span-1-of-3">
+            <label for="group">Group</label>
+        </div>
+        <div class="row span-2-of-3">
+            <select th:field="*{studentGroupId}" name="group" id="group" class="span-2-of-4">
+                <option value=""> --</option>
+                <option th:each="group : ${groups}"
+                        th:value="${group.id}"
+                        th:utext="${group.name}"></option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <div class="row span-1-of-3">
+            <label for="duration">Lesson duration</label>
+        </div>
+        <div class="row span-2-of-3">
+            <input type="number" name="duration" id="duration" placeholder=" Minutes"
+                   th:field="${request.durationMinutes}" class="span-2-of-4" required/>
+        </div>
+    </div>
+
+    <div>
+        <div class="row span-1-of-3">
+            <label for="lesson-date-time">Lesson date and time</label>
+        </div>
+        <div class="row span-2-of-3">
+            <input type="datetime-local" name="lesson-date-time" id="lesson-date-time"
+                   th:field="${request.lessonDate}" class="span-2-of-4"/>
+        </div>
+    </div>
+
+    <div>
+        <div class="row span-05-of-3">
+            <label>&nbsp;</label>
+        </div>
+        <div class="row">
+            <input type="submit" value="Add lesson" class="btn-container">
+            <a href="/lessonShowAll" class="btn-container">Back</a>
+        </div>
+    </div>
+
+</form>
+
+<label>&nbsp;</label>
+<div class="form-messages success row" role="alert" th:text="${success}" th:if="${success}"></div>
+<table th:if="${errors != null}" class="form-messages error">
+    <tr th:each="error : ${errors}">
+        <td th:text="${error.field}"></td>
+        <td th:text="${error.message}"></td>
+    </tr>
+</table>
+
+
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>View all groups</title>
+</head>
+
+<body class="frame-slave">
+
+<a th:href="@{/groupAdd}" class="btn-container">Add studentGroup</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID:</th>
+        <th>Name:</th>
+        <th>Education start year:</th>
+        <th>Education end year:</th>
+    </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+
+    <tr th:each="studentGroup : ${studentGroups}">
+        <td th:text="${studentGroup.id}">000</td>
+        <td th:text="${studentGroup.name}">No name</td>
+        <td th:text="${studentGroup.educationYearStart}">No start year</td>
+        <td th:text="${studentGroup.educationYearEnd}">No end year</td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+
+</html>

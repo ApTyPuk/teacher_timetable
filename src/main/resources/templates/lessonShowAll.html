@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Teacher's Time Table">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+    <title>View all lessons</title>
+</head>
+
+<body class="frame-slave">
+
+<a th:href="@{/lessonAdd}" class="btn-container">Add Lesson</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID:</th>
+        <th>Lesson name:</th>
+        <th>Teachers name:</th>
+        <th>Groups name:</th>
+        <th>Duration:</th>
+        <th>Date & Start time:</th>
+    </tr>
+    </thead>
+
+    <tbody th:remove="all-but-first">
+
+    <tr th:each="lesson : ${lessons}">
+        <td th:text="${lesson.id}">000</td>
+        <td th:text="${lesson.lessonName}">No name</td>
+        <td th:text="${lesson.teacher.name} + ' ' + ${lesson.teacher.lastName}">No teacher</td>
+        <td th:text="${lesson.studentGroup.name}">No group</td>
+        <td th:text="${lesson.durationMinutes}">No duration</td>
+        <td th:text="${lesson.lessonDate}">2000.01.01 00:00</td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+
+</html>
